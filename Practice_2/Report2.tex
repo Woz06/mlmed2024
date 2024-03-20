@@ -54,14 +54,39 @@ The model is implemented using the TensorFlow and Keras libraries in Python. It 
 The model is compiled with the Adam optimizer and mean squared error loss function. The mean absolute error (MAE) is also tracked as a metric during training.
 
 \section{Training and Evaluation}
-The model is trained for 10 epochs with a batch size of 32, using the training and validation sets created during data preprocessing. The training and validation loss, as well as the MAE, are monitored during training.
+In the training of the model on the HC18 dataset, a total of 10 epochs were run, each epoch representing a full iteration over the training dataset. The model was trained using batches, with 25 batches processed per epoch. The training process was both time-intensive and computationally demanding, with each epoch taking approximately 416 to 422 seconds (about 7 minutes) to complete.
 
-After training, the model is evaluated on the validation set, and the validation MAE is reported.
+The training started with a high initial loss of 7670.4570 and a mean absolute error (MAE) of 67.6236. However, as the epochs progressed, both the loss and the MAE on the training data showed a notable decrease, indicating that the model was effectively learning from the data. Specifically, by the end of the 10th epoch, the loss was reduced to 1632.0128, and the MAE to 30.8700, demonstrating significant improvement in the model's predictive accuracy.
+
+The validation results, which provide an estimate of the model's performance on unseen data, also showed a positive trend. The initial validation loss of 2377.1650 and MAE of 38.5890 at the first epoch were reduced to 1220.9517 and 27.2775 by the 10th epoch, respectively. This reduction in validation loss and MAE across the epochs highlights the model's increasing generalization capability.
+
+Overall, the training process of the model on the HC18 dataset led to substantial improvements in both loss and MAE metrics, showcasing the model's learning efficacy and its potential for accurately predicting outcomes based on the dataset.
+
+Following the training process, the model was evaluated on a separate validation set to assess its performance on unseen data. This evaluation is crucial for determining the model's generalization ability. The evaluation involved processing the validation dataset (\texttt{val\_images}, \texttt{val\_hcs}) through the model, which consisted of 7 batches and took approximately 24 seconds in total.
+
+The results of this evaluation are significant. The model achieved a validation loss of 1220.9517 and a mean absolute error (MAE) of 27.2775. The MAE is particularly important as it directly reflects the average deviation of the model's predictions from the actual head circumference measurements. An MAE of 27.2775 indicates that, on average, the model's predictions are about 27.28 units away from the true measurements.
+
+This reported validation MAE of 27.277503967285156 underscores the model's predictive accuracy and its potential applicability in medical imaging, especially in estimating head circumference. It demonstrates the model's effective learning and generalization capabilities based on the HC18 dataset.
+
 
 \section{Results and Visualization}
 The training and validation loss, as well as the MAE, are plotted to visualize the model's performance during training.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Figure 1.png}
+    \caption{Training and validation loss and MAE plots}
+    \label{fig:training_loss_mae}
+\end{figure}
+
 Additionally, a plot is generated to compare the predicted head circumference values with the actual ground truth values for a subset of the validation set.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{Figure 2.png}
+    \caption{Prediction vs. ground truth visualization}
+    \label{fig:prediction_vs_ground_truth}
+\end{figure}
 
 The mean absolute error (MAE) between the predicted and actual head circumference values is calculated and reported.
 
